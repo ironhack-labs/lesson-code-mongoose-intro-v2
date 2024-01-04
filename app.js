@@ -68,11 +68,11 @@ app.post("/books", (req, res) => {
   })
     .then((createdBook) => {
     	console.log("Book created ->", createdBook);
-    	res.status(201).send(createdBook);
+    	res.status(201).json(createdBook);
   })
     .catch((error) => {
       console.error("Error while creating the book ->", error);
-      res.status(500).send({ error: "Failed to create the book" });
+      res.status(500).json({ error: "Failed to create the book" });
     });
 });
 
@@ -83,11 +83,11 @@ app.get("/books", (req, res) => {
     .then((books) => {
       console.log("Retrieved books ->", books);
     
-      res.status(200).send(books);
+      res.status(200).json(books);
     })
     .catch((error) => {
       console.error("Error while retrieving books ->", error);
-      res.status(500).send({ error: "Failed to retrieve books" });
+      res.status(500).json({ error: "Failed to retrieve books" });
     });
 });
 
@@ -99,11 +99,11 @@ app.put("/books/:id", (req, res) => {
     .then((updatedBook) => {
       console.log("Updated book ->", updatedBook);    
     
-      res.status(200).send(updatedBook);
+      res.status(200).json(updatedBook);
     })
     .catch((error) => {
       console.error("Error while updating the book ->", error);
-      res.status(500).send({ error: "Failed to update the book" });
+      res.status(500).json({ error: "Failed to update the book" });
     });
 });
 
@@ -113,11 +113,11 @@ app.delete("/books/:id", (req, res) => {
   Book.findByIdAndDelete(req.params.id)
     .then((result) => {
       console.log("Book deleted!")
-    	res.status(200).send({ message: "Book deleted successfully" })
+    	res.status(204).send()
   	})
     .catch((error) => {
       console.error("Error while deleting the book ->", error);    
-    	res.status(500).send({error: "Deleting book failed"})
+    	res.status(500).json({ error: "Deleting book failed" })
   	});
 });
 
@@ -131,11 +131,11 @@ app.post('/authors', (req, res) => {
   .then((createdAuthor) => {
   	console.log("Author added ->", createdAuthor);
   
-    res.status(201).send(createdAuthor);
+    res.status(201).json(createdAuthor);
   })
   .catch((error) => {
     console.error("Error while creating the author ->", error);
-    res.status(500).send({ error: "Failed to create the author" });
+    res.status(500).json({ error: "Failed to create the author" });
   });
 });
 
